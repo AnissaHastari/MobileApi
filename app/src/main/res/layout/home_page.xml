@@ -69,8 +69,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="67dp">
+        tools:layout_editor_absoluteX="-3dp"
+        tools:layout_editor_absoluteY="20dp">
 
         <GridLayout
             android:layout_width="match_parent"
