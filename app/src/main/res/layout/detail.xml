@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Judul Halaman -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Detail"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="#008B8B"
+        android:fontFamily="sans-serif-medium"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5" />
+
+    <!-- Nama Item -->
+
+    <!-- Harga -->
+
+    <!-- Deskripsi -->
+    <!-- Kotak 2 -->
+
+    <View
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_margin="8dp"
+        android:background="@android:color/darker_gray"
+        tools:layout_editor_absoluteX="130dp"
+        tools:layout_editor_absoluteY="43dp" />
+
+    <TextView
+        android:id="@+id/tvItemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="Camera Cannon"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="219dp" />
+
+    <TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="Rp. 50.000"
+        android:textColor="#008B8B"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="216dp" />
+
+    <!-- Owner Section -->
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="341dp"
+        android:layout_height="71dp"
+        android:text="Canon EOS R6 Mark II merupakan bodi mirrorless serbaguna untuk para pembuat konten multimedia."
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="259dp" />
+
+
+    <!-- Drop-down Input -->
+
+    <!-- Rent Now Button -->
+
+    <TextView
+        android:id="@+id/tvOwnerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Masukkan Durasi Peminjaman"
+        android:textColor="#008B8B"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="346dp" />
+
+    <Button
+        android:id="@+id/btnRentNow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#008B8B"
+        android:text="Rent now"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="600dp" />
+    <?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F5F5F5"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:layout_editor_absoluteX="-1dp"
+        tools:layout_editor_absoluteY="389dp">
+
+        <!-- Judul -->
+
+        <!-- Form Lama Sewa -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- Label -->
+            <TextView
+                android:id="@+id/tvLamaSewa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="Lama Sewa (hari):"
+                android:textColor="#008B8B"
+                android:textStyle="bold"
+                android:textSize="16sp" />
+
+            <!-- Spinner untuk memilih jumlah hari -->
+            <Spinner
+                android:id="@+id/spinnerJumlahHari"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="2"
+                android:background="@android:drawable/btn_dropdown" />
+        </LinearLayout>
+
+        <!-- Tombol Aksi -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <!-- Tombol Konfirmasi -->
+            <Button
+                android:id="@+id/btnKonfirmasi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="#EEEEEE"
+                android:text="Konfirmasi"
+                android:backgroundTint="#008B8B"
+                android:textColor="#000000"
+                android:textSize="14sp" />
+
+            <!-- Tombol Batal -->
+            <Button
+                android:id="@+id/btnBatal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#EEEEEE"
+                android:textColor="#000000"
+                android:text="Batal"
+                android:backgroundTint="#008B8B"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/home"
+        tools:layout_editor_absoluteX="180dp"
+        tools:layout_editor_absoluteY="664dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

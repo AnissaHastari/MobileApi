@@ -22,6 +22,13 @@
         android:layout_marginTop="20dp"
         android:layout_marginStart="10dp"/>
 
+    <ImageView
+        android:layout_width="94dp"
+        android:layout_height="52dp"
+        android:src="@drawable/Logo"
+        tools:layout_editor_absoluteX="288dp"
+        tools:layout_editor_absoluteY="-12dp" />
+
     <!-- Search Box (Mau sewa apa?) -->
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/searchEditText"
@@ -55,13 +62,15 @@
         tools:layout_editor_absoluteX="272dp"
         tools:layout_editor_absoluteY="643dp" />
 
+
+
     <?xml version="1.0" encoding="utf-8"?>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
-        tools:layout_editor_absoluteX="52dp"
-        tools:layout_editor_absoluteY="12dp">
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="67dp">
 
         <GridLayout
             android:layout_width="match_parent"
