@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
@@ -17,16 +18,16 @@
         android:layout_height="wrap_content"
         android:src="@drawable/signup2"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="141dp"
-        tools:layout_editor_absoluteY="31dp" />
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="34dp" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/orderconfirmed"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="65dp"
-        tools:layout_editor_absoluteY="73dp" />
+        tools:layout_editor_absoluteX="73dp"
+        tools:layout_editor_absoluteY="89dp" />
 
     <LinearLayout
         android:id="@+id/emailLayout"

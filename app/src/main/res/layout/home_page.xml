@@ -22,14 +22,16 @@
         android:layout_marginTop="20dp"
         android:layout_marginStart="10dp"/>
 
+    <!-- Search Box (Mau sewa apa?) -->
     <ImageView
         android:layout_width="94dp"
         android:layout_height="52dp"
+        android:layout_marginStart="264dp"
         android:src="@drawable/logo_sewan"
-        tools:layout_editor_absoluteX="288dp"
-        tools:layout_editor_absoluteY="-12dp" />
+        app:layout_constraintStart_toEndOf="@id/greetingText"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
 
-    <!-- Search Box (Mau sewa apa?) -->
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/searchEditText"
         android:layout_width="0dp"
@@ -48,81 +50,87 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="10dp"/>
 
+    <!-- Button for Home -->
+
+    <!-- Button for Profile -->
     <ImageView
+        android:id="@+id/homebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="50dp"
         android:src="@drawable/home"
-        tools:layout_editor_absoluteX="110dp"
-        tools:layout_editor_absoluteY="643dp" />
+        app:layout_constraintEnd_toStartOf="@id/profilebutton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scroll" />
 
+    <!-- ScrollView for Content -->
     <ImageView
+        android:id="@+id/profilebutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="192dp"
+        android:layout_marginTop="12dp"
         android:src="@drawable/person"
-        tools:layout_editor_absoluteX="272dp"
-        tools:layout_editor_absoluteY="643dp" />
+        app:layout_constraintStart_toEndOf="@id/homebutton"
+        app:layout_constraintTop_toBottomOf="@id/scroll" />
 
-
-
-    <?xml version="1.0" encoding="utf-8"?>
     <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="520dp"
         android:padding="16dp"
-        tools:layout_editor_absoluteX="-3dp"
-        tools:layout_editor_absoluteY="20dp">
+        app:layout_constraintTop_toBottomOf="@id/searchEditText">
 
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:columnCount="2"
-            android:padding="8dp">
+            android:layout_paddingRight="8dp"
+            android:layout_paddingLeft="8dp">
 
             <!-- Kotak 1 -->
-            A
+            <View
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_margin="6dp"
+                android:background="@android:color/darker_gray" />
+
             <!-- Kotak 2 -->
             <View
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_row="0"
-                android:layout_column="0"
-                android:layout_margin="8dp"
-                android:background="@android:color/darker_gray" />
-
-            <View
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_margin="8dp"
+                android:layout_margin="6dp"
                 android:background="@android:color/darker_gray" />
 
             <!-- Kotak 3 -->
             <View
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_margin="8dp"
+                android:layout_margin="6dp"
                 android:background="@android:color/darker_gray" />
 
             <!-- Kotak 4 -->
             <View
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_margin="8dp"
+                android:layout_margin="6dp"
                 android:background="@android:color/darker_gray" />
 
             <!-- Kotak 5 -->
             <View
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_margin="8dp"
+                android:layout_margin="6dp"
                 android:background="@android:color/darker_gray" />
 
             <!-- Kotak 6 -->
             <View
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_margin="8dp"
+                android:layout_margin="6dp"
                 android:background="@android:color/darker_gray" />
 
         </GridLayout>
