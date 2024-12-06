@@ -15,44 +15,49 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/Signup2"
-        tools:layout_editor_absoluteX="165dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:src="@drawable/signup2"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="141dp"
+        tools:layout_editor_absoluteY="31dp" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/orderconfirmed"
-        tools:layout_editor_absoluteX="93dp"
-        tools:layout_editor_absoluteY="79dp" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="65dp"
+        tools:layout_editor_absoluteY="73dp" />
 
     <LinearLayout
         android:id="@+id/emailLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
         android:layout_marginTop="288dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/rounded_bg">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="10dp"
+            android:paddingLeft="10dp"
             android:src="@android:drawable/ic_dialog_email"
-            android:tint="#008B8B" />
+            app:tint="#008B8B" />
 
         <EditText
             android:id="@+id/emailEditText"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
+            android:layout_gravity="center"
             android:background="@android:color/transparent"
             android:backgroundTint="#008B8B"
             android:hint="Email"
@@ -65,27 +70,30 @@
 
     <LinearLayout
         android:id="@+id/passwordLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/emailLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_bg">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:src="@android:drawable/ic_lock_lock"
-            android:tint="#008B8B"
-            android:layout_marginEnd="10dp"/>
+            android:layout_marginEnd="10dp"
+            android:paddingLeft="10dp"
+            app:tint="#008B8B" />
 
         <EditText
             android:id="@+id/passwordEditText"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_weight="1"
+            android:layout_gravity="center"
             android:hint="Password"
             android:textColorHint="#008B8B"
             android:textColor="#008B8B"
@@ -99,27 +107,30 @@
     <!-- Confirm Password Section -->
     <LinearLayout
         android:id="@+id/confirmPasswordLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/passwordLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_bg">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center_vertical"
             android:src="@android:drawable/ic_lock_lock"
-            android:tint="#008B8B"
+            app:tint="#008B8B"
+            android:paddingLeft="10dp"
             android:layout_marginEnd="10dp"/>
 
         <EditText
             android:id="@+id/confirmPasswordEditText"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_weight="1"
+            android:layout_gravity="center"
             android:hint="Confirm your password"
             android:textColorHint="#008B8B"
             android:textColor="#008B8B"
@@ -133,7 +144,7 @@
     <!-- Sign Up Button -->
     <Button
         android:id="@+id/btnSignUp"
-        android:layout_width="0dp"
+        android:layout_width="200dp"
         android:layout_height="60dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="40dp"
@@ -145,7 +156,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/confirmPasswordLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

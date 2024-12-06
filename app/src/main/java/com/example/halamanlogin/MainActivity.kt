@@ -1,20 +1,40 @@
 package com.example.halamanlogin
 
+//noinspection SuspiciousImport
+import android.R
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.button.MaterialButton
+
 
 class MainActivity : AppCompatActivity() {
+
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.welcome_page)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        setContentView(com.example.halamanlogin.R.layout.welcomepage)
+
+
+        val buttonlogin: Button = findViewById(R.id.button1)
+        val buttonsignup: MaterialButton = findViewById(R.id.button2)
+
+
+        buttonlogin.setOnClickListener {
+
+            val loginIntent = Intent(this, LoginActivity::class.java)
+            startActivity(loginIntent)
+        }
+
+
+        buttonsignup.setOnClickListener {
+
+            val signUpIntent = Intent(this, Signup::class.java)
+            startActivity(signUpIntent)
         }
     }
 }

@@ -25,7 +25,7 @@
     <ImageView
         android:layout_width="94dp"
         android:layout_height="52dp"
-        android:src="@drawable/Logo"
+        android:src="@drawable/logo_sewan"
         tools:layout_editor_absoluteX="288dp"
         tools:layout_editor_absoluteY="-12dp" />
 

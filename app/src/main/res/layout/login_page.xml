@@ -10,7 +10,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/LogoLogin"
+        android:src="@drawable/logologin"
         tools:layout_editor_absoluteX="177dp"
         tools:layout_editor_absoluteY="35dp"
         tools:ignore="MissingConstraints" />
@@ -47,7 +47,7 @@
 
         <EditText
             android:id="@+id/emailEditText"
-            android:layout_width="222dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
@@ -103,9 +103,10 @@
             android:textColor="#008B8B"
             android:textColorHint="#008B8B" />
     </LinearLayout>
+
     <!-- Sign Up Button -->
     <Button
-        android:id="@+id/btnSignUp"
+        android:id="@+id/login_page_button"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:layout_marginStart="10dp"
@@ -120,4 +121,6 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="619dp" />
+        tools:layout_editor_absoluteY="608dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
