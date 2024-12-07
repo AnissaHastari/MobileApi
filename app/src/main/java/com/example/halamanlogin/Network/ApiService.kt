@@ -11,17 +11,17 @@ import retrofit2.http.Path
 import retrofit2.http.PUT
 
 interface ApiService {
-    @POST("login")
+    @POST("pengguna")
     fun login(@Body loginRequest: LoginRequest): Call<LoginResponse>
 
-    @POST("signup") // Sesuaikan endpoint
+    @POST("pengguna")
     fun signup(@Body signupRequest: SignupRequest): Call<Void>
 
 
-    @GET("products")  // Ganti dengan endpoint yang sesuai untuk mengambil semua produk
+    @GET("products")
     fun getProducts(): Call<List<Product>>
 
-    @GET("products/{id}")  // Ganti dengan endpoint yang sesuai untuk mengambil detail produk
+    @GET("products/{id}")
     fun getProductDetails(@Path("id") productId: String): Call<Product>
 
     @GET("user/profile")

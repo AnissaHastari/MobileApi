@@ -24,14 +24,14 @@ class EditProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.edit_profile)
 
-        // Menyambungkan komponen UI
+
         nameEditText = findViewById(R.id.usernameEditText)
         emailEditText = findViewById(R.id.emailEditText)
         phoneEditText = findViewById(R.id.phoneEditText)
         addressEditText = findViewById(R.id.addressEditText)
         saveButton = findViewById(R.id.saveButton)
 
-        // Menyimpan perubahan profil
+
         saveButton.setOnClickListener {
             val updatedUser = User(
                 name = nameEditText.text.toString(),

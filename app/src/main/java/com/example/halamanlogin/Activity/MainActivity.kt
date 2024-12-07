@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(com.example.halamanlogin.R.layout.welcomepage)
+        setContentView(R.layout.welcomepage)
 
         val buttonlogin: Button = findViewById(R.id.button1)
         val buttonsignup: MaterialButton = findViewById(R.id.button2)

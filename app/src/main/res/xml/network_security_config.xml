@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- Mengizinkan cleartext traffic ke IP tertentu -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">192.168.12.128</domain>
+        <domain includeSubdomains="true">10.0.2.2</domain>
+    </domain-config>
+
+    <!-- Aturan default: menolak cleartext traffic lainnya -->
+    <base-config cleartextTrafficPermitted="false" />
+</network-security-config>

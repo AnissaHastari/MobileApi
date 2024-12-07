@@ -53,32 +53,32 @@ class LoginActivity : AppCompatActivity() {
     private fun loginUser(email: String, password: String) {
         val loginRequest = LoginRequest(email, password)
 
-        // Menggunakan Retrofit untuk mengirim request login ke server
+
         RetrofitInstance.apiService.login(loginRequest).enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
 
-                    // Jika login berhasil dan statusnya "success"
+
                     if (loginResponse?.status == "success") {
                         Toast.makeText(applicationContext, "Login Berhasil", Toast.LENGTH_SHORT).show()
 
-                        // Arahkan ke halaman HomeActivity setelah login sukses
+
                         val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                         startActivity(intent)
                         finish()
                     } else {
-                        // Jika status tidak "success" tampilkan pesan error
+
                         Toast.makeText(applicationContext, loginResponse?.message ?: "Email atau Password salah", Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    // Jika response dari server tidak sukses
+
                     Toast.makeText(applicationContext, "Terjadi kesalahan pada server", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                // Menangani kegagalan koneksi ke server
+
                 Toast.makeText(applicationContext, "Gagal terhubung ke server: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })

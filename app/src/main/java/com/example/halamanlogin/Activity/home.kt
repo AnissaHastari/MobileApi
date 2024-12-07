@@ -24,16 +24,16 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_pages)
 
-        // Menyambungkan RecyclerView
+
         recyclerView = findViewById(R.id.productsRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         productAdapter = ProductAdapter { product -> onProductClicked(product) }
         recyclerView.adapter = productAdapter
 
-        // Ambil data produk dari API
+
         fetchProducts()
 
-        // Tombol profil
+
         findViewById<View>(R.id.profileButton).setOnClickListener {
             val intent = Intent(this@HomeActivity, ProfileActivity::class.java)
             startActivity(intent)
