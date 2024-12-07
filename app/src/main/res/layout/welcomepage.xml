@@ -4,7 +4,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Activity.MainActivity">
 
     <!-- Logo Image -->
     <ImageView
@@ -20,7 +20,7 @@
 
     <!-- Login Button -->
     <Button
-        android:id="@+id/home_login"
+        android:id="@+id/button1"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:backgroundTint="#008B8B"
@@ -37,7 +37,7 @@
 
     <!-- Sign Up Button -->
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/home_signup"
+        android:id="@+id/button2"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:elevation="4dp"
@@ -49,7 +49,7 @@
         app:cornerRadius="50dp"
         app:strokeColor="#008B8B"
         app:strokeWidth="2dp"
-        app:layout_constraintTop_toBottomOf="@id/home_login"
+        app:layout_constraintTop_toBottomOf="@id/button1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

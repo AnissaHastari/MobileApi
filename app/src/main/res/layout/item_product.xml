@@ -1,33 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="150dp"
-    android:layout_height="150dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:cardCornerRadius="8dp"
-    android:cardElevation="4dp">
+    android:padding="16dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    tools:context=".Activity.HomeActivity">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center">
+<LinearLayout
+android:orientation="horizontal"
+android:layout_width="match_parent"
+android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/productImage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ic_launcher_foreground"
-            android:scaleType="centerCrop" />
+<!-- Gambar produk -->
+<ImageView
+    android:id="@+id/productImageView"
+    android:layout_width="80dp"
+    android:layout_height="80dp"
+    android:layout_marginEnd="16dp"
+    android:scaleType="centerCrop"
+    android:contentDescription="Product Image" />
 
-        <TextView
-            android:id="@+id/productName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Product Name"
-            android:textSize="14sp"
-            android:gravity="center"
-            android:paddingTop="4dp" />
+<!-- Detail Produk -->
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1">
 
-    </LinearLayout>
-</androidx.cardview.widget.CardView>
+    <TextView
+        android:id="@+id/productNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Product Name"
+        android:textStyle="bold"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/productPriceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp 100,000"
+        android:textColor="#008B8B"
+        android:textSize="14sp" />
+</LinearLayout>
+</LinearLayout>
+    </androidx.cardview.widget.CardView>

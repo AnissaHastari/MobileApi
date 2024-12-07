@@ -1,4 +1,4 @@
-package com.example.halamanlogin
+package com.example.halamanlogin.Model
 
 data class SignupRequest(
     val email: String,

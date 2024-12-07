@@ -2,34 +2,199 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
     android:background="#FFFFFF">
 
+    <!-- Title -->
     <TextView
         android:id="@+id/greetingText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginBottom="16dp"
         android:text="Riwayat Penyewaan"
         android:textColor="#008B8B"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center" />
 
-    <View
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_row="0"
-        android:layout_column="0"
-        android:layout_margin="8dp"
-        android:background="@android:color/darker_gray"
-        tools:layout_editor_absoluteX="120dp"
-        tools:layout_editor_absoluteY="51dp" />
+    <!-- ScrollView untuk Daftar Riwayat -->
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/imageCart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/greetingText"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:id="@+id/historyList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Item Riwayat Penyewaan 1 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:background="#F9F9F9"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <!-- Gambar Barang -->
+                <View
+                    android:id="@+id/itemImage1"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@android:color/darker_gray" />
+
+                <!-- Informasi Barang -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/itemName1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="Nama Barang: Camera Canon"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/startDate1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="Tanggal Penyewaan: 2024-12-01"
+                        android:textColor="#000000"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/endDate1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="Tanggal Pengembalian: 2024-12-06"
+                        android:textColor="#000000"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/statusText1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="Status: Sedang Disewa"
+                        android:textColor="#000000"
+                        android:textSize="14sp" />
+
+                    <Button
+                        android:id="@+id/confirmButton1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#008B8B"
+                        android:text="Konfirmasi"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Item Riwayat Penyewaan 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:background="#F9F9F9"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <!-- Gambar Barang -->
+                <View
+                    android:id="@+id/itemImage2"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@android:color/darker_gray" />
+
+                <!-- Informasi Barang -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/itemName2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="Nama Barang: Laptop Dell"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/startDate2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="Tanggal Penyewaan: 2024-12-03"
+                        android:textColor="#000000"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/endDate2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="Tanggal Pengembalian: 2024-12-10"
+                        android:textColor="#000000"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/statusText2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="Status: Selesai"
+                        android:textColor="#000000"
+                        android:textSize="14sp" />
+
+                    <Button
+                        android:id="@+id/confirmButton2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#008B8B"
+                        android:text="Konfirmasi"
+                        android:textColor="#FFFFFF"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Gambar Keranjang -->
+    <ImageView
+        android:id="@+id/imageCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/online_store"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,189 +2,107 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="#FFFFFF"
-    tools:context=".MainActivity">
+    android:padding="16dp">
 
-    <!-- Gambar Barang -->
-
-    <!-- Nama Pengguna -->
-
-    <!-- Gambar Profil -->
-
-    <!-- Edit Profile Section -->
-    <TextView
-        android:id="@+id/greetingText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Profile"
-        android:textColor="#008B8B"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center" />
-
+    <!-- Gambar Profil Pengguna -->
     <ImageView
         android:id="@+id/itemImage"
-        android:layout_width="200dp"
+        android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_marginTop="48dp"
-        android:contentDescription="Gambar Barang"
-        android:src="@drawable/orderconfirmed"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/person"
+        android:contentDescription="Profile Picture"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <LinearLayout
-        android:id="@+id/editProfileSection"
+    <!-- Nama Pengguna -->
+    <TextView
+        android:id="@+id/nameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Nama Pengguna: Sidiq Tirta Wijaya"
+        android:textSize="18sp"
+        android:textStyle="bold"
         android:layout_marginTop="16dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="8dp"
         app:layout_constraintTop_toBottomOf="@id/itemImage"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- Teks Edit Profile -->
-        <TextView
-            android:id="@+id/editProfileText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="Edit Profile"
-            android:textColor="#008B8B"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/editProfileIcon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:contentDescription="Edit Profile Icon"
-            android:src="@drawable/person"
-            android:tint="#008B8B" />
-    </LinearLayout>
-
-    <!-- Informasi Profil -->
-    <!-- Nama Pengguna -->
-
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:text="Nama Pengguna: Sidiq Tirta Wijaya"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/itemImage" />
-
-    <TextView
-        android:id="@+id/returnDate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Tanggal Pengembalian Terakhir: 5 Desember 2024"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/address" />
-
-    <TextView
-        android:id="@+id/walletBalance"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Dompet Saya: Rp 500.000"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="265dp" />
-
+    <!-- Email Pengguna -->
     <TextView
         android:id="@+id/email"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Email: sidiq.tirta@email.com"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/walletBalance" />
-
-    <TextView
-        android:id="@+id/address"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Alamat: Kampung Dalangan, Jawa Tengah"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/phoneNumber" />
-
-    <TextView
-        android:id="@+id/phoneNumber"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Nomor Telepon: 0812-3456-7890"
-        android:textColor="#000000"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email" />
-
-    <!-- Tombol Mulai Sewa -->
-
-    <Button
-        android:id="@+id/startRentButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#008B8B"
-        android:text="Mulai Sewa"
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="394dp" />
-
-    <Button
-        android:id="@+id/startRentButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#008B8B"
-        android:text="Sign Out"
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="596dp" />
-
-    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/person"
-        tools:layout_editor_absoluteX="180dp"
-        tools:layout_editor_absoluteY="664dp" />
+        android:text="Email: sidiq.tirta@email.com"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/nameText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Nomor Telepon Pengguna -->
+    <TextView
+        android:id="@+id/phoneNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nomor Telepon: 0812-3456-7890"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Alamat Pengguna -->
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Alamat: Kampung Dalangan, Jawa Tengah"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintTop_toBottomOf="@id/phoneNumber"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Tombol Edit Profile -->
+    <TextView
+        android:id="@+id/editProfileText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Profile"
+        android:textSize="16sp"
+        android:textColor="#008B8B"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintTop_toBottomOf="@id/address"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Tombol Mulai Sewa -->
+    <Button
+        android:id="@+id/startRentButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:text="Mulai Sewa"
+        app:layout_constraintTop_toBottomOf="@id/editProfileText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Tombol Sign Out -->
+    <Button
+        android:id="@+id/signOutButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Sign Out"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/startRentButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
