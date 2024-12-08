@@ -27,7 +27,7 @@ class ProductDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_product_detail)
+        setContentView(R.layout.detail_page)
 
         // Menyambungkan elemen UI
         tvTitle = findViewById(R.id.tvTitle)

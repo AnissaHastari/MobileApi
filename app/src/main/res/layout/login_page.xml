@@ -52,7 +52,7 @@
             app:tint="#008B8B" />
 
         <EditText
-            android:id="@+id/emailEditText"
+            android:id="@+id/usernameEditText"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

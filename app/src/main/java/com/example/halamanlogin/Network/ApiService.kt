@@ -2,6 +2,7 @@ package com.example.halamanlogin.Network
 
 import com.example.halamanlogin.Model.Product
 import com.example.halamanlogin.Model.SignupRequest
+import com.example.halamanlogin.Model.SignupResponse
 import com.example.halamanlogin.Model.User
 import retrofit2.Call
 import retrofit2.http.Body
@@ -11,12 +12,11 @@ import retrofit2.http.Path
 import retrofit2.http.PUT
 
 interface ApiService {
-    @POST("pengguna")
+    @POST("api/login")
     fun login(@Body loginRequest: LoginRequest): Call<LoginResponse>
 
-    @POST("pengguna")
-    fun signup(@Body signupRequest: SignupRequest): Call<Void>
-
+    @POST("api/pengguna")
+    fun signup(@Body signupRequest: SignupRequest): Call<SignupResponse>
 
     @GET("products")
     fun getProducts(): Call<List<Product>>

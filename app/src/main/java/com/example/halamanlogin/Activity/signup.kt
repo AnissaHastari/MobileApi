@@ -1,3 +1,4 @@
+// Signup.kt
 package com.example.halamanlogin.Activity
 
 import android.content.Intent
@@ -9,8 +10,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.halamanlogin.Activity.HomeActivity
 import com.example.halamanlogin.Model.SignupRequest
+import com.example.halamanlogin.Model.SignupResponse
 import com.example.halamanlogin.Network.RetrofitInstance
 import com.example.halamanlogin.R
 import retrofit2.Call
@@ -18,7 +19,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class Signup : AppCompatActivity() {
-    private lateinit var emailEditText: EditText
+    private lateinit var usernameEditText: EditText
     private lateinit var passwordEditText: EditText
     private lateinit var confirmPasswordEditText: EditText
     private lateinit var signUpButton: Button
@@ -28,20 +29,18 @@ class Signup : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.signup_page)
 
-
-        emailEditText = findViewById(R.id.emailEditText)
+        // Initialize views
+        usernameEditText = findViewById(R.id.emailEditText) // Change ID if necessary
         passwordEditText = findViewById(R.id.passwordEditText)
         confirmPasswordEditText = findViewById(R.id.confirmPasswordEditText)
         signUpButton = findViewById(R.id.btnSignUp)
 
-
         signUpButton.setOnClickListener {
-            val email = emailEditText.text.toString().trim()
+            val username = usernameEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
             val confirmPassword = confirmPasswordEditText.text.toString().trim()
 
-
-            if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -51,11 +50,9 @@ class Signup : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-
-            val signupRequest = SignupRequest(email, password)
+            val signupRequest = SignupRequest(username, password)
             sendSignupRequest(signupRequest)
         }
-
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -65,23 +62,39 @@ class Signup : AppCompatActivity() {
     }
 
     private fun sendSignupRequest(signupRequest: SignupRequest) {
-
-        val retrofit = RetrofitInstance.apiService
-        retrofit.signup(signupRequest).enqueue(object : Callback<Void> {
-            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+        val apiService = RetrofitInstance.apiService
+        apiService.signup(signupRequest).enqueue(object : Callback<SignupResponse> {
+            override fun onResponse(call: Call<SignupResponse>, response: Response<SignupResponse>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(this@Signup, "Sign up successful", Toast.LENGTH_SHORT).show()
-
-
-                    val intent = Intent(this@Signup, HomeActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                    val signupResponse = response.body()
+                    if (signupResponse != null) {
+                        if (signupResponse.status == "true") {
+                            Toast.makeText(this@Signup, "${signupResponse.message} Register Berhasil. Silahkan Login", Toast.LENGTH_LONG).show()
+                            val intent = Intent(this@Signup, HomeActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        } else {
+                            // Assuming the API sends back user data on failure
+                            val errorData = signupResponse.data
+                            if (errorData != null) {
+                                Toast.makeText(
+                                    this@Signup,
+                                    "Username: ${errorData.username}\nPassword: ${errorData.password}",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            } else {
+                                Toast.makeText(this@Signup, "Registration failed: ${signupResponse.message}", Toast.LENGTH_LONG).show()
+                            }
+                        }
+                    } else {
+                        Toast.makeText(this@Signup, "Unexpected response from server", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
                     Toast.makeText(this@Signup, "Sign up failed: ${response.message()}", Toast.LENGTH_SHORT).show()
                 }
             }
 
-            override fun onFailure(call: Call<Void>, t: Throwable) {
+            override fun onFailure(call: Call<SignupResponse>, t: Throwable) {
                 Toast.makeText(this@Signup, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
