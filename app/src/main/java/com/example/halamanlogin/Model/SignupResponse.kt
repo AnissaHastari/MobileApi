@@ -1,5 +1,6 @@
 package com.example.halamanlogin.Model
 
+
 data class SignupResponse(
     val status: String,
     val message: String,
@@ -8,5 +9,6 @@ data class SignupResponse(
 
 data class UserData(
     val username: String,
-    val password: String
+    val password: String,
+    val token: String
 )

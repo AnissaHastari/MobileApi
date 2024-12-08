@@ -3,6 +3,8 @@ package com.example.halamanlogin.Activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -10,7 +12,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.halamanlogin.Activity.HomeActivity
 import com.example.halamanlogin.Network.LoginRequest
 import com.example.halamanlogin.Network.LoginResponse
 import com.example.halamanlogin.Network.RetrofitInstance
@@ -21,32 +22,44 @@ import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var usernameEditText: EditText // Changed from emailEditText to usernameEditText
+    private lateinit var usernameEditText: EditText
     private lateinit var passwordEditText: EditText
     private lateinit var loginButton: Button
+
+    companion object {
+        private const val TAG = "LoginActivity"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.login_page)  // Ensure this layout exists
+        setContentView(R.layout.login_page)
 
-        // Initialize views with updated IDs
-        usernameEditText = findViewById(R.id.usernameEditText) // Changed ID from emailEditText
+        usernameEditText = findViewById(R.id.usernameEditText)
         passwordEditText = findViewById(R.id.passwordEditText)
-        loginButton = findViewById(R.id.login_page_button) // Ensure this ID matches your XML
+        loginButton = findViewById(R.id.login_page_button)
 
         loginButton.setOnClickListener {
             val username = usernameEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
 
-            if (username.isNotEmpty() && password.isNotEmpty()) {
-                loginUser(username, password)
-            } else {
-                Toast.makeText(this, "Username dan Password harus diisi", Toast.LENGTH_SHORT).show()
+            // Validasi Input
+            if (username.isEmpty()) {
+                usernameEditText.error = "Username wajib diisi"
+                usernameEditText.requestFocus()
+                return@setOnClickListener
             }
+
+            if (password.isEmpty()) {
+                passwordEditText.error = "Password wajib diisi"
+                passwordEditText.requestFocus()
+                return@setOnClickListener
+            }
+
+            // Inisiasi Login
+            loginUser(username, password)
         }
 
-        // Handle window insets for edge-to-edge display
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -56,40 +69,52 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loginUser(username: String, password: String) {
         val loginRequest = LoginRequest(username, password)
+        Log.d(TAG, "Mencoba login dengan username: $username")
 
         RetrofitInstance.apiService.login(loginRequest).enqueue(object : Callback<LoginResponse> {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                Log.d(TAG, "onResponse: ${response.code()} - ${response.message()}")
+
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
+                    Log.d(TAG, "LoginResponse: $loginResponse")
 
                     if (loginResponse != null) {
-                        if (loginResponse.status == "true" || loginResponse.status.equals("success", ignoreCase = true)) {
+                        Log.d(TAG, "Status: ${loginResponse.status}")
+                        Log.d(TAG, "Message: ${loginResponse.message}")
+
+                        // Sesuaikan kondisi berdasarkan nilai status dari API
+                        if (loginResponse.status == 0) { // Asumsikan status=0 adalah sukses
                             Toast.makeText(this@LoginActivity, "Login Berhasil", Toast.LENGTH_SHORT).show()
 
-                            // Navigate to HomeActivity
+                            // Navigasi ke HomeActivity
                             val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                             startActivity(intent)
                             finish()
                         } else {
-                            // Handle login failure with message from API
+                            // Tampilkan pesan gagal login
                             Toast.makeText(
                                 this@LoginActivity,
                                 loginResponse.message.ifEmpty { "Username atau Password salah" },
                                 Toast.LENGTH_SHORT
                             ).show()
+                            Log.d(TAG, "Login gagal: ${loginResponse.message}")
                         }
                     } else {
                         Toast.makeText(this@LoginActivity, "Respon dari server tidak valid", Toast.LENGTH_SHORT).show()
+                        Log.e(TAG, "LoginResponse null")
                     }
                 } else {
-                    // Handle HTTP error responses
+                    // Tangani error HTTP
                     Toast.makeText(this@LoginActivity, "Terjadi kesalahan pada server: ${response.message()}", Toast.LENGTH_SHORT).show()
+                    Log.e(TAG, "Error server: ${response.code()} - ${response.message()}")
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                // Handle network failures or unexpected errors
+                // Tangani kegagalan jaringan
                 Toast.makeText(this@LoginActivity, "Gagal terhubung ke server: ${t.message}", Toast.LENGTH_SHORT).show()
+                Log.e(TAG, "Kegagalan jaringan: ${t.message}", t)
             }
         })
     }

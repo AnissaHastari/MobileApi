@@ -2,12 +2,12 @@
 package com.example.halamanlogin.Network
 
 data class LoginResponse(
-    val status: String,      // e.g., "true" or "false"
+    val status: Int,
     val message: String,
-    val data: UserData?      // Optional, contains user information on failure or success
+    val data: UserData?
 )
 
 data class UserData(
-    val username: String,
-    val password: String // Typically, you wouldn't send back the password. Ensure this aligns with your API.
+    val username: String?,
+    val token: String?
 )
