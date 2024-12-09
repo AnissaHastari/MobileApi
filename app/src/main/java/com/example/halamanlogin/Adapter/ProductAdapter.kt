@@ -1,25 +1,19 @@
-// File: com/example/halamanlogin/Adapter/ProductAdapter.kt
-
 package com.example.halamanlogin.Adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.halamanlogin.Model.Product
-import com.example.halamanlogin.R
 import com.example.halamanlogin.databinding.ItemProductBinding
 import com.squareup.picasso.Picasso
 
-class ProductAdapter(private val onClick: (Product) -> Unit) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+class ProductAdapter(private val onItemClick: (Product) -> Unit) :
+    RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
-    private var productList: List<Product> = listOf()
-
-    fun submitList(products: List<Product>) {
-        productList = products
-        notifyDataSetChanged()
-    }
+    private val productList = mutableListOf<Product>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
+        // Inflate the layout using ViewBinding
         val binding = ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ProductViewHolder(binding)
     }
@@ -29,25 +23,31 @@ class ProductAdapter(private val onClick: (Product) -> Unit) : RecyclerView.Adap
         holder.bind(product)
     }
 
-    override fun getItemCount(): Int {
-        return productList.size
+    override fun getItemCount(): Int = productList.size
+
+    // Function to update the data in the adapter
+    fun submitList(products: List<Product>) {
+        productList.clear()
+        productList.addAll(products)
+        notifyDataSetChanged()
     }
 
-    inner class ProductViewHolder(private val binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
+    // ViewHolder that uses ViewBinding to bind the views
+    inner class ProductViewHolder(private val binding: ItemProductBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
         fun bind(product: Product) {
-            // Menampilkan gambar produk
-            Picasso.get()
-                .load(product.imageUrl)
-                .placeholder(R.drawable.placeholder) // Pastikan drawable ini ada
-                .error(R.drawable.error) // Pastikan drawable ini ada
+            // Bind data to the views using the ViewBinding object
+            binding.productNameTextView.text = product.nama_produk
+            binding.productPriceTextView.text = "Rp ${product.harga}"
+
+            // Load the image using Picasso or Glide
+            Picasso.get().load("http://192.168.12.128:8000${product.image_path}")
                 .into(binding.productImageView)
 
-            binding.productNameTextView.text = product.name
-            binding.productPriceTextView.text = "Rp ${product.price}"
-
-            // Menangani klik produk
+            // Set the item click listener
             binding.root.setOnClickListener {
-                onClick(product)
+                onItemClick(product)
             }
         }
     }

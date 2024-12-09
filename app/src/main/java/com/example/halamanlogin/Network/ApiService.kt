@@ -4,6 +4,7 @@ import com.example.halamanlogin.Model.Product
 import com.example.halamanlogin.Model.SignupRequest
 import com.example.halamanlogin.Model.SignupResponse
 import com.example.halamanlogin.Model.User
+import com.example.halamanlogin.Model.ApiResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -18,8 +19,8 @@ interface ApiService {
     @POST("api/pengguna")
     fun signup(@Body signupRequest: SignupRequest): Call<SignupResponse>
 
-    @GET("products")
-    fun getProducts(): Call<List<Product>>
+    @GET("api/items/") // Endpoint API untuk mendapatkan daftar produk
+    fun getProducts(): Call<ApiResponse>
 
     @GET("products/{id}")
     fun getProductDetails(@Path("id") productId: String): Call<Product>

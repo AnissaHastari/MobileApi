@@ -11,42 +11,42 @@
     app:cardElevation="4dp"
     tools:context=".Activity.HomeActivity">
 
-<LinearLayout
-android:orientation="horizontal"
-android:layout_width="match_parent"
-android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-<!-- Gambar produk -->
-<ImageView
-    android:id="@+id/productImageView"
-    android:layout_width="80dp"
-    android:layout_height="80dp"
-    android:layout_marginEnd="16dp"
-    android:scaleType="centerCrop"
-    android:contentDescription="Product Image" />
+        <!-- Gambar produk -->
+        <ImageView
+            android:id="@+id/productImageView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="16dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="Product Image" />
 
-<!-- Detail Produk -->
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_weight="1">
+        <!-- Detail Produk -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
-    <TextView
-        android:id="@+id/productNameTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Product Name"
-        android:textStyle="bold"
-        android:textSize="16sp" />
+            <TextView
+                android:id="@+id/productNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Product Name"
+                android:textStyle="bold"
+                android:textSize="16sp" />
 
-    <TextView
-        android:id="@+id/productPriceTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Rp 100,000"
-        android:textColor="#008B8B"
-        android:textSize="14sp" />
-</LinearLayout>
-</LinearLayout>
-    </androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/productPriceTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp 100,000"
+                android:textColor="#008B8B"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

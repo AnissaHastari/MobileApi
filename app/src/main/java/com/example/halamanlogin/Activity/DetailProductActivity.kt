@@ -35,13 +35,21 @@ class ProductDetailActivity : AppCompatActivity() {
         tvPrice = findViewById(R.id.tvPrice)
         tvDescription = findViewById(R.id.tvDescription)
         productImage = findViewById(R.id.productImage)
-        btnCheckout = findViewById(R.id.btnCheckout)
+        btnOrder = findViewById(R.id.btnOrder)   // Tombol Sewa Barang
 
         // Mengambil ID produk dari intent
         val productId = intent.getStringExtra("product_id")
 
         // Ambil data produk berdasarkan ID
         fetchProductDetails(productId)
+
+        // Tombol Sewa Barang
+        btnOrder.setOnClickListener {
+            // Arahkan ke halaman Checkout saat tombol Sewa Barang ditekan
+            val intent = Intent(this@ProductDetailActivity, CheckoutActivity::class.java)
+            intent.putExtra("product_id", productId) // Kirimkan data produk jika diperlukan
+            startActivity(intent)
+        }
 
         // Tombol Checkout
         btnCheckout.setOnClickListener {
@@ -59,12 +67,12 @@ class ProductDetailActivity : AppCompatActivity() {
                         val product = response.body()
                         if (product != null) {
                             // Menampilkan data produk di UI
-                            tvItemName.text = product.name
-                            tvPrice.text = "Rp ${product.price}"
-                            tvDescription.text = product.description
+                            tvItemName.text = product.nama_produk
+                            tvPrice.text = "Rp ${product.harga}"
+                            tvDescription.text = product.deskripsi
 
                             // Menampilkan gambar produk menggunakan Picasso
-                            Picasso.get().load(product.imageUrl).into(productImage)
+                            Picasso.get().load("http://192.168.12.128:8000${product.image_path}").into(productImage)
                         }
                     } else {
                         Toast.makeText(this@ProductDetailActivity, "Failed to fetch product details", Toast.LENGTH_SHORT).show()
