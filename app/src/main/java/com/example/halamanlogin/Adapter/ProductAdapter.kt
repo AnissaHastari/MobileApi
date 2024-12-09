@@ -39,10 +39,10 @@ class ProductAdapter(private val onItemClick: (Product) -> Unit) :
         fun bind(product: Product) {
             // Bind data to the views using the ViewBinding object
             binding.productNameTextView.text = product.nama_produk
-            binding.productPriceTextView.text = "Rp ${product.harga}"
+            binding.productPriceTextView.text = product.harga  // Menampilkan harga yang sudah diformat
 
             // Load the image using Picasso or Glide
-            Picasso.get().load("http://192.168.12.128:8000${product.image_path}")
+            Picasso.get().load("http://192.168.1.11:8000${product.image_path}")
                 .into(binding.productImageView)
 
             // Set the item click listener
@@ -52,3 +52,4 @@ class ProductAdapter(private val onItemClick: (Product) -> Unit) :
         }
     }
 }
+

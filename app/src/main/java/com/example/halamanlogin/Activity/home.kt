@@ -52,14 +52,18 @@ class HomeActivity : AppCompatActivity() {
                     val apiResponse = response.body()
                     if (apiResponse != null && apiResponse.status == "true") {
                         val products = apiResponse.data
-                        // Mengonversi harga dengan membersihkan simbol dan titik
+                        // Mengonversi harga dengan membersihkan simbol dan titik, lalu menambahkan format yang benar
                         products.forEach { product ->
                             try {
+                                // Menghapus simbol "Rp" dan titik pemisah ribuan
                                 val cleanPrice = product.harga.replace("Rp", "").replace(".", "").trim()
-                                val price = cleanPrice.toInt() // Mengonversi ke angka
-                                // Menampilkan harga dengan format
-                                val formattedPrice = "Rp ${NumberFormat.getNumberInstance(Locale("id", "ID")).format(price)}"
-                                // Lakukan hal lain dengan data produk
+                                val price = cleanPrice.toInt() // Mengonversi harga menjadi integer
+
+                                // Format harga dengan simbol "Rp." dan titik pemisah ribuan
+                                val formattedPrice = "Rp. ${NumberFormat.getNumberInstance(Locale("id", "ID")).format(price)}"
+
+                                // Melakukan apa pun dengan formattedPrice jika perlu
+                                product.harga = formattedPrice // Update harga dengan format yang benar
                             } catch (e: NumberFormatException) {
                                 Log.e("Error", "Invalid price format: ${product.harga}")
                             }
@@ -81,9 +85,10 @@ class HomeActivity : AppCompatActivity() {
 
 
 
+
     private fun onProductClicked(product: Product) {
         val intent = Intent(this@HomeActivity, ProductDetailActivity::class.java)
-        intent.putExtra("product_id", product.id)
+        intent.putExtra("product_id", product.item_id)
         intent.putExtra("product_name", product.nama_produk)
         intent.putExtra("product_price", product.harga)
         intent.putExtra("product_description", product.deskripsi)
