@@ -42,7 +42,7 @@ class ProductAdapter(private val onItemClick: (Product) -> Unit) :
             binding.productPriceTextView.text = "Rp ${product.harga}"
 
             // Load the image using Picasso or Glide
-            Picasso.get().load("http://192.168.12.128:8000${product.image_path}")
+            Picasso.get().load("http://192.168.18.2:8000${product.image_path}")
                 .into(binding.productImageView)
 
             // Set the item click listener

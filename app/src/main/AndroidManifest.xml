@@ -24,6 +24,9 @@
             android:name=".Activity.ProductDetailActivity"
             android:exported="false" />
         <activity
+            android:name=".Activity.ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activity.HomeActivity"
             android:exported="false" />
         <activity

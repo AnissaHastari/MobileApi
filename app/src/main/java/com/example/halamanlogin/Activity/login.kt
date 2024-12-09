@@ -1,10 +1,10 @@
 // LoginActivity.kt
 package com.example.halamanlogin.Activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -82,9 +82,21 @@ class LoginActivity : AppCompatActivity() {
                     if (loginResponse != null) {
                         Log.d(TAG, "Status: ${loginResponse.status}")
                         Log.d(TAG, "Message: ${loginResponse.message}")
+                        Log.d(TAG, "penggunaid: ${loginResponse.wallet}")
 
                         // Sesuaikan kondisi berdasarkan nilai status dari API
                         if (loginResponse.status == 0) { // Asumsikan status=0 adalah sukses
+                            val penggunaId = loginResponse.pengguna_id
+                            val wallet = loginResponse.wallet
+
+                            // Simpan data pengguna ke SharedPreferences
+                            val sharedPreferences = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
+                            sharedPreferences.edit()
+                                .putString("penggunaId", penggunaId)
+                                .putString("wallet", wallet)
+                                .apply()
+
+                            Log.d(TAG, "Pengguna ID disimpan: $penggunaId")  // Tambahkan log ini untuk memverifikasi
                             Toast.makeText(this@LoginActivity, "Login Berhasil", Toast.LENGTH_SHORT).show()
 
                             // Navigasi ke HomeActivity
