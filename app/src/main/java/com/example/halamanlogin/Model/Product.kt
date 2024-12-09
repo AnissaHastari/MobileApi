@@ -1,10 +1,10 @@
 package com.example.halamanlogin.Model
 
 data class Product(
-    val id: String,
+    val item_id: String,
     val nama_produk: String,
     val image_path: String,
     val deskripsi: String,
-    val harga: String,
+    var harga: String,
     val status: Int
 )

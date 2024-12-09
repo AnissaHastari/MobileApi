@@ -27,8 +27,8 @@ interface ApiService {
     @GET("api/items/") // Endpoint API untuk mendapatkan daftar produk
     fun getProducts(): Call<ApiResponse>
 
-    @GET("products/{id}")
-    fun getProductDetails(@Path("id") productId: String): Call<Product>
+    @GET("api/items/{item_id}")
+    fun getProductDetail(@Path("id") productId: String): Call<ApiResponse>
 
     @GET("api/pengguna")
     fun getUserProfile(@Header("penggunaId") penggunaId: String): Call<User>
