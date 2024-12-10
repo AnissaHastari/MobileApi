@@ -51,7 +51,7 @@ class HomeActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val apiResponse = response.body()
                     if (apiResponse != null && apiResponse.status == "true") {
-                        val products = apiResponse.data
+                            val products = apiResponse.data
                         // Mengonversi harga dengan membersihkan simbol dan titik, lalu menambahkan format yang benar
                         products.forEach { product ->
                             try {

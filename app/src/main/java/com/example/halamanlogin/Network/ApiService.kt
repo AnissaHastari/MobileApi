@@ -1,17 +1,17 @@
 package com.example.halamanlogin.Network
 
-import com.example.halamanlogin.Model.Product
 import com.example.halamanlogin.Model.SignupRequest
 import com.example.halamanlogin.Model.SignupResponse
-import com.example.halamanlogin.Model.User
 import com.example.halamanlogin.Model.ApiResponse
+import com.example.halamanlogin.Model.EditResponse
+import com.example.halamanlogin.Model.UserResponse
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.Multipart
 import retrofit2.http.Path
 import retrofit2.http.PUT
@@ -30,20 +30,23 @@ interface ApiService {
     @GET("api/items/{item_id}")
     fun getProductDetail(@Path("id") productId: String): Call<ApiResponse>
 
-    @GET("api/pengguna")
-    fun getUserProfile(@Header("penggunaId") penggunaId: String): Call<User>
+    @GET("api/pengguna/{penggunaId}")
+    fun getUserProfile(@Path("penggunaId") penggunaId: String): Call<UserResponse>
 
-    @Multipart
-    @PUT("api/pengguna")
-    fun updateUserProfileWithImage(
-        @Part("Nama_pengguna") namaPengguna: RequestBody,
-        @Part("Email") email: RequestBody,
-        @Part("No_Telepon") noTelepon: RequestBody,
-        @Part("Alamat") alamat: RequestBody,
-        @Part("image_path") profileImage: MultipartBody.Part
-    ): Call<User>
+    @FormUrlEncoded
+    @PUT("api/pengguna/{penggunaId}")
+    fun updateUserProfile(
+        @Path("penggunaId") penggunaId: String,
+        @Field("Nama_pengguna") namaPengguna: String,
+        @Field("Email") email: String,
+        @Field("No_Telepon") noTelepon: String,
+        @Field("Alamat") alamat: String): Call<EditResponse>
 
+//    @Multipart
+//    @PUT("api/pengguna/{penggunaId}")
+//    fun updateimage(
+//        @Path("penggunaId") penggunaId: String,
+//        @Part imageprofile: MultipartBody.Part?
+//    ): Call<EditResponse>
 
-    @PUT("user/profile")
-    fun updateUserProfile(@Body user: com.example.halamanlogin.Model.User): Call<User>
 }
