@@ -80,10 +80,16 @@ class CheckoutActivity : AppCompatActivity() {
 
     private fun confirmRent(penggunaId: String, productId: Int, days: Int, totalPrice: Double) {
         val rentRequest = RentRequest(
-            pengguna_id = penggunaId,
-            product_id = productId,
+            renter_id = penggunaId.toInt(),
+            item_id = productId,
             durasi = days,
-            harga_total = totalPrice
+            harga_total = totalPrice,
+            image_path = "12",
+            owner_id = 12,
+            nama_produk = "12",
+            tgl_pengembalian = "2024-12-20",
+            status = 0
+
         )
         val sharedPreferences = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
         val walletStr = sharedPreferences.getString("wallet", "0")
@@ -95,6 +101,7 @@ class CheckoutActivity : AppCompatActivity() {
         }
         RetrofitInstance.apiService.rentItem(rentRequest).enqueue(object : Callback<RentResponse> {
             override fun onResponse(call: Call<RentResponse>, response: Response<RentResponse>) {
+                Log.d(TAG, "onResponse: ${response.body()}")
                 if (response.isSuccessful && response.body() != null) {
                     val rentResponse = response.body()!!
                     if (rentResponse.status == "true") {
@@ -106,6 +113,7 @@ class CheckoutActivity : AppCompatActivity() {
                     }
                 } else {
                     Toast.makeText(this@CheckoutActivity, "Error: ${response.message()}", Toast.LENGTH_SHORT).show()
+                    Log.e(TAG, "Error Body: ${response.errorBody()?.string()}")
                 }
             }
 

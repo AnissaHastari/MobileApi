@@ -1,8 +1,13 @@
 package com.example.halamanlogin.Network
 
 data class RentRequest(
-    val pengguna_id: String,
-    val product_id: Int,
+    val owner_id: Int,
+    val renter_id: Int,
+    val item_id: Int,
+    val image_path: String,
+    val nama_produk: String,
     val durasi: Int,
-    val harga_total: Double
+    val tgl_pengembalian: String,
+    val harga_total: Double,
+    val status: Int
 )
