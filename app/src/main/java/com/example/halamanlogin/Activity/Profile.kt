@@ -96,7 +96,7 @@ class ProfileActivity : AppCompatActivity() {
                                     if (User != null) {
                                         // Prepare profile image URL
                                         val profilePath = if (User.Profile_path.isNotEmpty()) {
-                                            "http://192.168.1.12:8000/storage/${User.Profile_path.replace("public/", "")}"
+                                            "http://192.168.18.2:8000/storage/${User.Profile_path.replace("public/", "")}"
                                         } else {
                                             null
                                         }
