@@ -62,10 +62,23 @@
         android:id="@+id/productImageView"
         android:layout_width="0dp"
         android:layout_height="200dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/ic_launcher_background"
-        app:layout_constraintTop_toBottomOf="@id/tvDescription"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:scaleType="centerCrop" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDescription"
+        app:layout_constraintVertical_bias="0.202" />
+
+    <Button
+        android:id="@+id/buttoncheckout"
+        android:layout_width="181dp"
+        android:layout_height="57dp"
+        android:text="Pesan barang"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/productImageView"
+        app:layout_constraintVertical_bias="0.469" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,9 @@
 package com.example.halamanlogin.Activity
 
+import android.content.ContentValues.TAG
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +21,13 @@ class ProductDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detail_page)
+
+        val sharedPreferences = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
+        val wallet = sharedPreferences.getString("wallet", null) ?: ""
+        val penggunaId = sharedPreferences.getString("penggunaId", null) ?: ""
+
+        Log.d(TAG, "penggunaId: $penggunaId")
+        Log.d(TAG, "wallet: $wallet")
 
         // Initialize views
         tvTitle = findViewById(R.id.tvTitle)
@@ -38,7 +48,8 @@ class ProductDetailActivity : AppCompatActivity() {
         tvPrice.text = productPrice
         tvDescription.text = productDescription
 
+        Log.d(TAG, "gambar: $productImage")
         // Load the image using Picasso
-        Picasso.get().load("http://192.168.1.11:8000$productImage").into(productImageView)
+        Picasso.get().load("http://192.168.18.2:8000$productImage").into(productImageView)
     }
 }

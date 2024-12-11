@@ -63,7 +63,7 @@ class HomeActivity : AppCompatActivity() {
                                 val formattedPrice = "Rp. ${NumberFormat.getNumberInstance(Locale("id", "ID")).format(price)}"
 
                                 // Melakukan apa pun dengan formattedPrice jika perlu
-                                product.harga = formattedPrice // Update harga dengan format yang benar
+                                product.formattedPrice = formattedPrice // Update harga dengan format yang benar
                             } catch (e: NumberFormatException) {
                                 Log.e("Error", "Invalid price format: ${product.harga}")
                             }
@@ -90,7 +90,7 @@ class HomeActivity : AppCompatActivity() {
         val intent = Intent(this@HomeActivity, ProductDetailActivity::class.java)
         intent.putExtra("product_id", product.item_id)
         intent.putExtra("product_name", product.nama_produk)
-        intent.putExtra("product_price", product.harga)
+        intent.putExtra("product_price", product.formattedPrice)
         intent.putExtra("product_description", product.deskripsi)
         intent.putExtra("product_image", product.image_path)
         startActivity(intent)
