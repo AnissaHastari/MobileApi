@@ -56,11 +56,11 @@ class HomeActivity : AppCompatActivity() {
                         products.forEach { product ->
                             try {
                                 // Menghapus simbol "Rp" dan titik pemisah ribuan
-                                val cleanPrice = product.harga.replace("Rp", "").replace(".", "").trim()
+                                val cleanPrice = product.harga.replace("", "").replace(".", "").trim()
                                 val price = cleanPrice.toInt() // Mengonversi harga menjadi integer
 
                                 // Format harga dengan simbol "Rp." dan titik pemisah ribuan
-                                val formattedPrice = "Rp. ${NumberFormat.getNumberInstance(Locale("id", "ID")).format(price)}"
+                                val formattedPrice = "${NumberFormat.getNumberInstance(Locale("id", "ID")).format(price)}"
 
                                 // Melakukan apa pun dengan formattedPrice jika perlu
                                 product.harga = formattedPrice // Update harga dengan format yang benar

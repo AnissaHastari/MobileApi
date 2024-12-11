@@ -1,4 +1,3 @@
-// LoginActivity.kt
 package com.example.halamanlogin.Activity
 
 import android.content.Context
