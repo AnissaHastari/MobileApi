@@ -6,5 +6,6 @@ data class Product(
     val image_path: String,
     val deskripsi: String,
     var harga: String,
-    val status: Int
+    val status: Int,
+    var formattedPrice: String
 )
