@@ -51,9 +51,10 @@ class HomeActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val apiResponse = response.body()
                     if (apiResponse != null && apiResponse.status == "true") {
-                            val products = apiResponse.data
+                        val products = apiResponse.data
+
                         // Mengonversi harga dengan membersihkan simbol dan titik, lalu menambahkan format yang benar
-                        products.forEach { product ->
+                        products.filter { product -> product.status == 1 }.forEach { product ->
                             try {
                                 // Menghapus simbol "Rp" dan titik pemisah ribuan
                                 val cleanPrice = product.harga.replace("", "").replace(".", "").trim()
@@ -62,13 +63,16 @@ class HomeActivity : AppCompatActivity() {
                                 // Format harga dengan simbol "Rp." dan titik pemisah ribuan
                                 val formattedPrice = "${NumberFormat.getNumberInstance(Locale("id", "ID")).format(price)}"
 
-                                // Melakukan apa pun dengan formattedPrice jika perlu
-                                product.formattedPrice = formattedPrice // Update harga dengan format yang benar
+                                // Update harga dengan format yang benar
+                                product.harga = formattedPrice
                             } catch (e: NumberFormatException) {
                                 Log.e("Error", "Invalid price format: ${product.harga}")
                             }
                         }
-                        productAdapter.submitList(products) // Mengirim data produk ke adapter
+
+                        // Submit only filtered products to the adapter
+                        val filteredProducts = products.filter { product -> product.status == 1 }
+                        productAdapter.submitList(filteredProducts)
                     } else {
                         Toast.makeText(this@HomeActivity, "Failed to fetch products", Toast.LENGTH_SHORT).show()
                     }
@@ -90,9 +94,10 @@ class HomeActivity : AppCompatActivity() {
         val intent = Intent(this@HomeActivity, ProductDetailActivity::class.java)
         intent.putExtra("product_id", product.item_id)
         intent.putExtra("product_name", product.nama_produk)
-        intent.putExtra("product_price", product.formattedPrice)
+        intent.putExtra("product_price", product.harga)
         intent.putExtra("product_description", product.deskripsi)
         intent.putExtra("product_image", product.image_path)
+        intent.putExtra("ownerid", product.pengguna_id)
         startActivity(intent)
     }
 }

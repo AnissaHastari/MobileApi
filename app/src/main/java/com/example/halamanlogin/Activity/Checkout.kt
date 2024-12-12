@@ -19,6 +19,9 @@ import com.example.halamanlogin.Model.RentalHistoryItem
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class CheckoutActivity : AppCompatActivity() {
 
@@ -52,11 +55,14 @@ class CheckoutActivity : AppCompatActivity() {
 
         // Get data from Intent
         val productId = intent.getIntExtra("product_id", -1)
-        val productName = intent.getStringExtra("product_name")
+        val productName = intent.getStringExtra("product_name")?: ""
         val productPrice = intent.getStringExtra("product_price")
         val days = intent.getIntExtra("days", 1)
         val totalPrice = intent.getStringExtra("total_price")?.toDoubleOrNull() ?: 0.0
         val penggunaId = intent.getStringExtra("pengguna_id")
+        val image_path = intent.getStringExtra("product_image")?: "errr"
+        val owner_id = intent.getStringExtra("ownerid")?: "000"
+        val returnDate = calculateReturnDate(days)
 
         if (productId == -1 || penggunaId.isNullOrEmpty()) {
             Toast.makeText(this, "Data penyewaan tidak valid", Toast.LENGTH_SHORT).show()
@@ -71,25 +77,36 @@ class CheckoutActivity : AppCompatActivity() {
 
         // Handle konfirmasi penyewaan
         btnConfirmRent.setOnClickListener {
-            confirmRent(penggunaId, productId, days, totalPrice)
+            confirmRent(penggunaId, productId, days, totalPrice, image_path, owner_id, productName, returnDate)
         }
 
         // Fetch rental history
         fetchRentalHistory(penggunaId)
     }
 
-    private fun confirmRent(penggunaId: String, productId: Int, days: Int, totalPrice: Double) {
+
+    fun calculateReturnDate(days: Int): String {
+        val calendar = Calendar.getInstance()
+
+        // Tambahkan jumlah hari ke tanggal saat ini
+        calendar.add(Calendar.DAY_OF_MONTH, days)
+
+        // Format tanggal menjadi "yyyy-MM-dd"
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        return dateFormat.format(calendar.time)
+    }
+
+    private fun confirmRent(penggunaId: String, productId: Int, days: Int, totalPrice: Double, image_path: String, owner_id:String, productName:String, returnDate:String) {
         val rentRequest = RentRequest(
             renter_id = penggunaId.toInt(),
             item_id = productId,
             durasi = days,
             harga_total = totalPrice,
-            image_path = "12",
-            owner_id = 12,
-            nama_produk = "12",
-            tgl_pengembalian = "2024-12-20",
+            image_path = image_path,
+            owner_id = owner_id.toInt(),
+            nama_produk = productName,
+            tgl_pengembalian = returnDate,
             status = 0
-
         )
         val sharedPreferences = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
         val walletStr = sharedPreferences.getString("wallet", "0")
@@ -118,6 +135,14 @@ class CheckoutActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<RentResponse>, t: Throwable) {
+                Log.d(TAG, "penggunaId: $penggunaId")
+                Log.d(TAG, "productId: $productId")
+                Log.d(TAG, "days: $days")
+                Log.d(TAG, "totalPrice: $totalPrice")
+                Log.d(TAG, "image_path: $image_path")
+                Log.d(TAG, "owner_id: $owner_id")
+                Log.d(TAG, "productName: $productName")
+                Log.d(TAG, "returnDate: $returnDate")
                 Toast.makeText(this@CheckoutActivity, "Koneksi gagal: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })

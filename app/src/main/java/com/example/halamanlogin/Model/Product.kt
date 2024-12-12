@@ -7,5 +7,6 @@ data class Product(
     val deskripsi: String,
     var harga: String,
     val status: Int,
-    var formattedPrice: String
+    var formattedPrice: String,
+    val pengguna_id : String
 )

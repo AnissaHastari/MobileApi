@@ -46,7 +46,7 @@ class RentalHistoryAdapter(
         holder.hargaTotal.text = "Rp. ${String.format("%,.0f", rental.harga_total)}"
 
         // Load image menggunakan Picasso
-        Picasso.get().load("http://192.168.1.12:8000${rental.image_path}").into(holder.itemImage)
+        Picasso.get().load("http://192.168.18.2:8000${rental.image_path}").into(holder.itemImage)
 
         // Set status text dan tombol aksi berdasarkan status
         when (rental.status) {
