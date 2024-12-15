@@ -4,9 +4,12 @@ import com.example.halamanlogin.Model.ApiResponse
 import com.example.halamanlogin.Model.EditResponse
 import com.example.halamanlogin.Model.HistoryResponse
 import com.example.halamanlogin.Model.RentResponse
+import com.example.halamanlogin.Model.RentStatusResponse
 import com.example.halamanlogin.Model.SignupRequest
 import com.example.halamanlogin.Model.SignupResponse
+import com.example.halamanlogin.Model.StatusResponse
 import com.example.halamanlogin.Model.UserResponse
+import com.example.halamanlogin.Model.itemStatusResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Field
@@ -45,15 +48,27 @@ interface ApiService {
     @POST("/api/rent_item")
     fun rentItem(@Body rentRequest: RentRequest): Call<RentResponse>
 
+    @FormUrlEncoded
+    @PUT("api/pengguna/status/{penggunaId}")
+    fun updateUserStatus(
+        @Path("penggunaId") penggunaId: String,
+        @Field("status") status: String): Call<StatusResponse>
+
+    @FormUrlEncoded
+    @PUT("api/items/status/{item_id}")
+    fun updateitemstatus(
+        @Path("item_id") item_id: String,
+        @Field("status") status: String): Call<itemStatusResponse>
+
     @GET("/api/rent_item/{pembeli_id}")
     fun getRentalHistory(@Path("pembeli_id") penggunaId: String): Call<HistoryResponse>
 
     // Endpoint untuk memperbarui status penyewaan
+    @FormUrlEncoded
     @PUT("/api/rent_item/status/{rent_id}")
     fun updateRentalStatus(
-        @Path("rent_id") rentId: Int,
-        @Body statusUpdate: Int
-    ): Call<Void>
+        @Path("rent_id") rentId: String,
+        @Field ("status")status: String): Call<RentStatusResponse>
 
 //    @Multipart
 //    @PUT("api/pengguna/{penggunaId}")

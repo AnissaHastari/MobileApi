@@ -22,6 +22,7 @@ import java.util.Locale
 import android.net.Uri
 import com.example.halamanlogin.Activity.LoginActivity.Companion
 import com.example.halamanlogin.Model.ApiResponse
+import com.example.halamanlogin.Model.StatusResponse
 import com.squareup.picasso.Picasso
 
 
@@ -36,6 +37,8 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var editProfileTextView: TextView
     private lateinit var startRentButton: Button
     private lateinit var signOutButton: Button
+    private lateinit var startSellButton: Button
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +54,7 @@ class ProfileActivity : AppCompatActivity() {
         editProfileTextView = findViewById(R.id.editProfileText)
         startRentButton = findViewById(R.id.startRentButton)
         signOutButton = findViewById(R.id.signOutButton)
+        startSellButton = findViewById(R.id.startsellButton)
 
         // Ambil pengguna ID dari SharedPreferences
         val sharedPreferences = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
@@ -70,6 +74,14 @@ class ProfileActivity : AppCompatActivity() {
         // Tombol Mulai Sewa
         startRentButton.setOnClickListener {
             val intent = Intent(this@ProfileActivity, HomeActivity::class.java)
+            startActivity(intent)
+        }
+
+        startSellButton.setOnClickListener {
+            updatestatus(penggunaId)
+
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("http://192.168.18.2/Sewan/index.html")
             startActivity(intent)
         }
 
@@ -149,6 +161,32 @@ class ProfileActivity : AppCompatActivity() {
                     Toast.makeText(this@ProfileActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
                 }
             })
+    }
+
+    private fun updatestatus(penggunaId: String) {
+
+        RetrofitInstance.apiService.updateUserStatus(penggunaId = penggunaId,
+            status = "1").enqueue(object : Callback<StatusResponse> {
+            override fun onResponse(call: Call<StatusResponse>, response: Response<StatusResponse>) {
+                if (response.isSuccessful && response.body() != null) {
+                    val statResponse = response.body()!!
+                    if (statResponse.status == "true") {
+                        Toast.makeText(this@ProfileActivity, "Status berhasil diperbarui", Toast.LENGTH_SHORT).show()
+                        // Tambahkan aksi jika perlu, seperti refresh data
+                    } else {
+                        // Tampilkan pesan error dari server
+                        Toast.makeText(this@ProfileActivity, statResponse.message, Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(this@ProfileActivity, "Error: ${response.message()}", Toast.LENGTH_SHORT).show()
+                    Log.e("ProfileActivity", "Error Body: ${response.errorBody()?.string()}")
+                }
+            }
+
+            override fun onFailure(call: Call<StatusResponse>, t: Throwable) {
+                Toast.makeText(this@ProfileActivity, "Koneksi gagal: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
 

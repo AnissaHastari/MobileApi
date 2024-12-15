@@ -16,6 +16,8 @@ import com.example.halamanlogin.Network.RetrofitInstance
 import com.example.halamanlogin.R
 import com.example.halamanlogin.adapters.RentalHistoryAdapter
 import com.example.halamanlogin.Model.RentalHistoryItem
+import com.example.halamanlogin.Model.StatusResponse
+import com.example.halamanlogin.Model.itemStatusResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -78,6 +80,7 @@ class CheckoutActivity : AppCompatActivity() {
         // Handle konfirmasi penyewaan
         btnConfirmRent.setOnClickListener {
             confirmRent(penggunaId, productId, days, totalPrice, image_path, owner_id, productName, returnDate)
+            updatestatusitem0(productId.toString())
         }
 
         // Fetch rental history
@@ -147,6 +150,33 @@ class CheckoutActivity : AppCompatActivity() {
             }
         })
 
+    }
+
+    private fun updatestatusitem0(productId: String) {
+
+        RetrofitInstance.apiService.updateitemstatus(item_id = productId,
+            status = "0").enqueue(object : Callback<itemStatusResponse> {
+            override fun onResponse(call: Call<itemStatusResponse>, response: Response<itemStatusResponse>) {
+                if (response.isSuccessful && response.body() != null) {
+                    val statResponse = response.body()!!
+                    if (statResponse.status == "true") {
+                        Toast.makeText(this@CheckoutActivity, "Status item berhasil diperbarui", Toast.LENGTH_SHORT).show()
+                        // Tambahkan aksi jika perlu, seperti refresh data
+                    } else {
+                        // Tampilkan pesan error dari server
+                        Toast.makeText(this@CheckoutActivity, statResponse.message, Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Log.d(TAG, "productId: $productId")
+                    Toast.makeText(this@CheckoutActivity, "Error: ${response.message()}", Toast.LENGTH_SHORT).show()
+                    Log.e("ProfileActivity", "Error Body: ${response.errorBody()?.string()}")
+                }
+            }
+
+            override fun onFailure(call: Call<itemStatusResponse>, t: Throwable) {
+                Toast.makeText(this@CheckoutActivity, "Koneksi gagal: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun fetchRentalHistory(penggunaId: String) {

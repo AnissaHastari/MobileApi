@@ -84,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
                         Log.d(TAG, "penggunaid: ${loginResponse.wallet}")
 
                         // Sesuaikan kondisi berdasarkan nilai status dari API
-                        if (loginResponse.status == 0) { // Asumsikan status=0 adalah sukses
+                        if (loginResponse.status == 1 || loginResponse.status == 0) { // Asumsikan status=0 adalah sukses
                             val penggunaId = loginResponse.pengguna_id
                             val wallet = loginResponse.wallet
 

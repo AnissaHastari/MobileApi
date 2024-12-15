@@ -1,6 +1,9 @@
 package com.example.halamanlogin.adapters
 
+import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +12,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.halamanlogin.Activity.HomeActivity
+import com.example.halamanlogin.Model.RentStatusResponse
 import com.example.halamanlogin.Network.ApiService
 import com.example.halamanlogin.R
 import com.example.halamanlogin.Model.RentalHistoryItem
+import com.example.halamanlogin.Model.StatusResponse
+import com.example.halamanlogin.Model.itemStatusResponse
+import com.example.halamanlogin.Network.RetrofitInstance
 import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
@@ -59,7 +67,7 @@ class RentalHistoryAdapter(
                 holder.actionButton.visibility = View.VISIBLE
                 holder.actionButton.text = "Konfirmasi Barang Diterima"
                 holder.actionButton.setOnClickListener {
-                    updateRentalStatus(rental.rent_id, 2)
+                    updateRentalStatus(rental.rent_id.toString(), "2")
                 }
             }
             2 -> {
@@ -67,7 +75,7 @@ class RentalHistoryAdapter(
                 holder.actionButton.visibility = View.VISIBLE
                 holder.actionButton.text = "Akhiri Menyewa"
                 holder.actionButton.setOnClickListener {
-                    updateRentalStatus(rental.rent_id, 3)
+                    updateRentalStatus(rental.rent_id.toString(), "3")
                 }
             }
             3 -> {
@@ -87,10 +95,10 @@ class RentalHistoryAdapter(
 
     override fun getItemCount(): Int = rentalList.size
 
-    private fun updateRentalStatus(rentId: Int, newStatus: Int) {
+    private fun updateRentalStatus(rentId: String, newStatus: String) {
         val call = apiService.updateRentalStatus(rentId, newStatus)
-        call.enqueue(object : Callback<Void> {
-            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+        call.enqueue(object : Callback<RentStatusResponse> {
+            override fun onResponse(call: Call<RentStatusResponse>, response: Response<RentStatusResponse>) {
                 if (response.isSuccessful) {
                     Toast.makeText(context, "Status penyewaan diperbarui", Toast.LENGTH_SHORT).show()
                     // Anda mungkin perlu memperbarui daftar penyewaan setelah perubahan
@@ -100,7 +108,7 @@ class RentalHistoryAdapter(
                 }
             }
 
-            override fun onFailure(call: Call<Void>, t: Throwable) {
+            override fun onFailure(call: Call<RentStatusResponse>, t: Throwable) {
                 Toast.makeText(context, "Koneksi gagal: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
