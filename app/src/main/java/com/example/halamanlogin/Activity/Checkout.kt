@@ -1,6 +1,7 @@
 package com.example.halamanlogin.Activity
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -18,6 +19,7 @@ import com.example.halamanlogin.adapters.RentalHistoryAdapter
 import com.example.halamanlogin.Model.RentalHistoryItem
 import com.example.halamanlogin.Model.StatusResponse
 import com.example.halamanlogin.Model.itemStatusResponse
+import com.example.halamanlogin.Model.walletResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -65,6 +67,9 @@ class CheckoutActivity : AppCompatActivity() {
         val image_path = intent.getStringExtra("product_image")?: "errr"
         val owner_id = intent.getStringExtra("ownerid")?: "000"
         val returnDate = calculateReturnDate(days)
+        val sharedPreferences = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
+        val walletStr = sharedPreferences.getString("wallet", "0")
+        val wallet = walletStr?.toDoubleOrNull() ?: 0.0
 
         if (productId == -1 || penggunaId.isNullOrEmpty()) {
             Toast.makeText(this, "Data penyewaan tidak valid", Toast.LENGTH_SHORT).show()
@@ -79,13 +84,33 @@ class CheckoutActivity : AppCompatActivity() {
 
         // Handle konfirmasi penyewaan
         btnConfirmRent.setOnClickListener {
-            confirmRent(penggunaId, productId, days, totalPrice, image_path, owner_id, productName, returnDate)
+            confirmRent(penggunaId, productId, days, totalPrice, image_path, owner_id, productName, returnDate, wallet)
             updatestatusitem0(productId.toString())
+            updateWallet(penggunaId, sharedPreferences, totalPrice)
+
         }
 
         // Fetch rental history
         fetchRentalHistory(penggunaId)
     }
+
+    fun updateWallet(penggunaId:String ,sharedPreferences: SharedPreferences, totalPrice: Double) {
+        // Get current wallet balance
+        val walletStr = sharedPreferences.getString("wallet", "0")
+        val currentWallet = walletStr?.toDoubleOrNull() ?: 0.0
+
+        // Subtract totalPrice from wallet balance
+        val updatedWallet = currentWallet - totalPrice
+
+        // Update shared preferences with the new wallet balance
+        sharedPreferences.edit().putString("wallet", updatedWallet.toString()).apply()
+
+        updatewalletpengguna(penggunaId, updatedWallet)
+
+        // Optionally log or perform actions with the updated wallet balance
+        Log.d("WalletUpdate", "Wallet updated: Old Balance = $currentWallet, New Balance = $updatedWallet")
+    }
+
 
 
     fun calculateReturnDate(days: Int): String {
@@ -99,7 +124,7 @@ class CheckoutActivity : AppCompatActivity() {
         return dateFormat.format(calendar.time)
     }
 
-    private fun confirmRent(penggunaId: String, productId: Int, days: Int, totalPrice: Double, image_path: String, owner_id:String, productName:String, returnDate:String) {
+    private fun confirmRent(penggunaId: String, productId: Int, days: Int, totalPrice: Double, image_path: String, owner_id:String, productName:String, returnDate:String, wallet:Double) {
         val rentRequest = RentRequest(
             renter_id = penggunaId.toInt(),
             item_id = productId,
@@ -111,10 +136,6 @@ class CheckoutActivity : AppCompatActivity() {
             tgl_pengembalian = returnDate,
             status = 0
         )
-        val sharedPreferences = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
-        val walletStr = sharedPreferences.getString("wallet", "0")
-        val wallet = walletStr?.toDoubleOrNull() ?: 0.0
-
         if (wallet < totalPrice) {
             Toast.makeText(this, "Saldo wallet tidak mencukupi. Silakan isi saldo terlebih dahulu.", Toast.LENGTH_SHORT).show()
             return
@@ -150,6 +171,32 @@ class CheckoutActivity : AppCompatActivity() {
             }
         })
 
+    }
+
+    private fun updatewalletpengguna(penggunaId: String, wallets: Double) {
+
+        RetrofitInstance.apiService.updatewallet(penggunaId = penggunaId,
+            wallet = wallets).enqueue(object : Callback<walletResponse> {
+            override fun onResponse(call: Call<walletResponse>, response: Response<walletResponse>) {
+                if (response.isSuccessful && response.body() != null) {
+                    val statResponse = response.body()!!
+                    if (statResponse.status == "true") {
+                        Toast.makeText(this@CheckoutActivity, "Status wallet berhasil diperbarui", Toast.LENGTH_SHORT).show()
+                        // Tambahkan aksi jika perlu, seperti refresh data
+                    } else {
+                        // Tampilkan pesan error dari server
+                        Toast.makeText(this@CheckoutActivity, statResponse.message, Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(this@CheckoutActivity, "Error: ${response.message()}", Toast.LENGTH_SHORT).show()
+                    Log.e("ProfileActivity", "Error Body: ${response.errorBody()?.string()}")
+                }
+            }
+
+            override fun onFailure(call: Call<walletResponse>, t: Throwable) {
+                Toast.makeText(this@CheckoutActivity, "Koneksi gagal: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun updatestatusitem0(productId: String) {

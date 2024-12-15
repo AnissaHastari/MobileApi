@@ -14,3 +14,8 @@ data class statrent(
     val rent_id: String,
     val status: String,
 )
+
+data class statwallet(
+    val penggunaId: String,
+    val wallet: Double,
+)

@@ -10,6 +10,7 @@ import com.example.halamanlogin.Model.SignupResponse
 import com.example.halamanlogin.Model.StatusResponse
 import com.example.halamanlogin.Model.UserResponse
 import com.example.halamanlogin.Model.itemStatusResponse
+import com.example.halamanlogin.Model.walletResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Field
@@ -69,6 +70,12 @@ interface ApiService {
     fun updateRentalStatus(
         @Path("rent_id") rentId: String,
         @Field ("status")status: String): Call<RentStatusResponse>
+
+    @FormUrlEncoded
+    @PUT("/api/pengguna/wallet/{penggunaId}")
+    fun updatewallet(
+        @Path("penggunaId") penggunaId: String,
+        @Field ("wallet")wallet: Double): Call<walletResponse>
 
 //    @Multipart
 //    @PUT("api/pengguna/{penggunaId}")

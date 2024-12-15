@@ -17,3 +17,9 @@ data class RentStatusResponse(
     val message: String,  // Pesan dari API
     val data: List<statrent> // Data profile pengguna
 )
+
+data class walletResponse(
+    val status: String,   // Status misalnya "true" atau "false"
+    val message: String,  // Pesan dari API
+    val data: List<statwallet> // Data profile pengguna
+)
