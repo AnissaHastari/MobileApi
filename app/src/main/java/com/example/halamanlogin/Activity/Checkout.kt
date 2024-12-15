@@ -17,7 +17,6 @@ import com.example.halamanlogin.Network.RetrofitInstance
 import com.example.halamanlogin.R
 import com.example.halamanlogin.adapters.RentalHistoryAdapter
 import com.example.halamanlogin.Model.RentalHistoryItem
-import com.example.halamanlogin.Model.StatusResponse
 import com.example.halamanlogin.Model.itemStatusResponse
 import com.example.halamanlogin.Model.walletResponse
 import retrofit2.Call
@@ -60,12 +59,12 @@ class CheckoutActivity : AppCompatActivity() {
         // Get data from Intent
         val productId = intent.getIntExtra("product_id", -1)
         val productName = intent.getStringExtra("product_name")?: ""
-        val productPrice = intent.getStringExtra("product_price")
+//        val productPrice = intent.getStringExtra("product_price")
         val days = intent.getIntExtra("days", 1)
         val totalPrice = intent.getStringExtra("total_price")?.toDoubleOrNull() ?: 0.0
         val penggunaId = intent.getStringExtra("pengguna_id")
-        val image_path = intent.getStringExtra("product_image")?: "errr"
-        val owner_id = intent.getStringExtra("ownerid")?: "000"
+        val imagepath = intent.getStringExtra("product_image")?: "errr"
+        val ownerid = intent.getStringExtra("ownerid")?: "000"
         val returnDate = calculateReturnDate(days)
         val sharedPreferences = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
         val walletStr = sharedPreferences.getString("wallet", "0")
@@ -84,7 +83,7 @@ class CheckoutActivity : AppCompatActivity() {
 
         // Handle konfirmasi penyewaan
         btnConfirmRent.setOnClickListener {
-            confirmRent(penggunaId, productId, days, totalPrice, image_path, owner_id, productName, returnDate, wallet)
+            confirmRent(penggunaId, productId, days, totalPrice, imagepath, ownerid, productName, returnDate, wallet)
             updatestatusitem0(productId.toString())
             updateWallet(penggunaId, sharedPreferences, totalPrice)
 
@@ -94,7 +93,7 @@ class CheckoutActivity : AppCompatActivity() {
         fetchRentalHistory(penggunaId)
     }
 
-    fun updateWallet(penggunaId:String ,sharedPreferences: SharedPreferences, totalPrice: Double) {
+    private fun updateWallet(penggunaId:String ,sharedPreferences: SharedPreferences, totalPrice: Double) {
         // Get current wallet balance
         val walletStr = sharedPreferences.getString("wallet", "0")
         val currentWallet = walletStr?.toDoubleOrNull() ?: 0.0
@@ -113,7 +112,7 @@ class CheckoutActivity : AppCompatActivity() {
 
 
 
-    fun calculateReturnDate(days: Int): String {
+    private fun calculateReturnDate(days: Int): String {
         val calendar = Calendar.getInstance()
 
         // Tambahkan jumlah hari ke tanggal saat ini
@@ -124,14 +123,14 @@ class CheckoutActivity : AppCompatActivity() {
         return dateFormat.format(calendar.time)
     }
 
-    private fun confirmRent(penggunaId: String, productId: Int, days: Int, totalPrice: Double, image_path: String, owner_id:String, productName:String, returnDate:String, wallet:Double) {
+    private fun confirmRent(penggunaId: String, productId: Int, days: Int, totalPrice: Double, imagepath: String, ownerid:String, productName:String, returnDate:String, wallet:Double) {
         val rentRequest = RentRequest(
             renter_id = penggunaId.toInt(),
             item_id = productId,
             durasi = days,
             harga_total = totalPrice,
-            image_path = image_path,
-            owner_id = owner_id.toInt(),
+            image_path = imagepath,
+            owner_id = ownerid.toInt(),
             nama_produk = productName,
             tgl_pengembalian = returnDate,
             status = 0
@@ -163,8 +162,8 @@ class CheckoutActivity : AppCompatActivity() {
                 Log.d(TAG, "productId: $productId")
                 Log.d(TAG, "days: $days")
                 Log.d(TAG, "totalPrice: $totalPrice")
-                Log.d(TAG, "image_path: $image_path")
-                Log.d(TAG, "owner_id: $owner_id")
+                Log.d(TAG, "imagepath: $imagepath")
+                Log.d(TAG, "ownerid: $ownerid")
                 Log.d(TAG, "productName: $productName")
                 Log.d(TAG, "returnDate: $returnDate")
                 Toast.makeText(this@CheckoutActivity, "Koneksi gagal: ${t.message}", Toast.LENGTH_SHORT).show()

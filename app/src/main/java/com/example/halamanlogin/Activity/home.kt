@@ -61,10 +61,11 @@ class HomeActivity : AppCompatActivity() {
                                 val price = cleanPrice.toInt() // Mengonversi harga menjadi integer
 
                                 // Format harga dengan simbol "Rp." dan titik pemisah ribuan
-                                val formattedPrice = "${NumberFormat.getNumberInstance(Locale("id", "ID")).format(price)}"
+                                val formattedPrice = NumberFormat.getNumberInstance(Locale("id", "ID")).format(price)
 
                                 // Update harga dengan format yang benar
                                 product.harga = formattedPrice
+
                             } catch (e: NumberFormatException) {
                                 Log.e("Error", "Invalid price format: ${product.harga}")
                             }

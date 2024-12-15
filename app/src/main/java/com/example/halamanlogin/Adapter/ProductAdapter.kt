@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.halamanlogin.Model.Product
+import com.example.halamanlogin.R
 import com.example.halamanlogin.databinding.ItemProductBinding
 import com.squareup.picasso.Picasso
 
@@ -27,9 +28,9 @@ class ProductAdapter(private val onItemClick: (Product) -> Unit) :
 
     // Function to update the data in the adapter
     fun submitList(products: List<Product>) {
-        productList.clear()
+        val startPosition = productList.size
         productList.addAll(products)
-        notifyDataSetChanged()
+        notifyItemRangeInserted(startPosition, products.size)
     }
 
     // ViewHolder that uses ViewBinding to bind the views
@@ -39,10 +40,14 @@ class ProductAdapter(private val onItemClick: (Product) -> Unit) :
         fun bind(product: Product) {
             // Bind data to the views using the ViewBinding object
             binding.productNameTextView.text = product.nama_produk
-            binding.productPriceTextView.text = "Rp. "+product.harga
+            val rp = "Rp. " + product.harga
+            binding.productPriceTextView.text = rp
 
             // Load the image using Picasso or Glide
             Picasso.get().load("http://192.168.18.2:8000${product.image_path}")
+                .placeholder(R.drawable.placeholder) // Placeholder saat gambar sedang dimuat
+                .resize(300, 300) // Ubah ukuran gambar untuk menghemat memori
+                .centerCrop() // Crop gambar agar sesuai dengan dimensi tampilan
                 .into(binding.productImageView)
 
             // Set the item click listener

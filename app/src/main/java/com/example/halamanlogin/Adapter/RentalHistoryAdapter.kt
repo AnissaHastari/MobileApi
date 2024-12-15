@@ -1,9 +1,6 @@
 package com.example.halamanlogin.adapters
 
-import android.content.ContentValues.TAG
 import android.content.Context
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,14 +9,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.halamanlogin.Activity.HomeActivity
 import com.example.halamanlogin.Model.RentStatusResponse
 import com.example.halamanlogin.Network.ApiService
 import com.example.halamanlogin.R
 import com.example.halamanlogin.Model.RentalHistoryItem
-import com.example.halamanlogin.Model.StatusResponse
-import com.example.halamanlogin.Model.itemStatusResponse
-import com.example.halamanlogin.Network.RetrofitInstance
 import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
@@ -48,13 +41,21 @@ class RentalHistoryAdapter(
 
     override fun onBindViewHolder(holder: RentalViewHolder, position: Int) {
         val rental = rentalList[position]
-        holder.itemName.text = rental.product_name
-        holder.durasi.text = "${rental.durasi} hari"
-        holder.tglPengembalian.text = "Tanggal Pengembalian: ${rental.tgl_pengembalian}"
-        holder.hargaTotal.text = "Rp. ${String.format("%,.0f", rental.harga_total)}"
+        val nama = "${rental.nama_produk}"
+        holder.itemName.text = nama
+        val hari = "Durasi : ${rental.durasi} hari"
+        holder.durasi.text = hari
+        val tgl = "Tanggal Pengembalian: ${rental.tgl_pengembalian}"
+        holder.tglPengembalian.text = tgl
+        val harga = "Total harga: Rp. ${String.format("%,.0f", rental.harga_total)}"
+        holder.hargaTotal.text = harga
 
         // Load image menggunakan Picasso
-        Picasso.get().load("http://192.168.18.2:8000${rental.image_path}").into(holder.itemImage)
+        Picasso.get().load("http://192.168.18.2:8000${rental.image_path}")
+            .placeholder(R.drawable.placeholder) // Placeholder saat gambar sedang dimuat
+            .resize(300, 300) // Ubah ukuran gambar untuk menghemat memori
+            .centerCrop() // Crop gambar agar sesuai dengan dimensi tampilan
+            .into(holder.itemImage)
 
         // Set status text dan tombol aksi berdasarkan status
         when (rental.status) {
