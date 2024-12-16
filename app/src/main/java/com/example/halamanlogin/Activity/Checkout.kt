@@ -146,7 +146,18 @@ class CheckoutActivity : AppCompatActivity() {
                     val rentResponse = response.body()!!
                     if (rentResponse.status == "true") {
                         Toast.makeText(this@CheckoutActivity, "Penyewaan berhasil", Toast.LENGTH_SHORT).show()
-                        // Panggil fetchRentalHistory untuk refresh
+
+                        val newRental = RentalHistoryItem(
+                            rent_id = productId, // Atau ID lain yang sesuai
+                            nama_produk = productName,
+                            harga_total = totalPrice,
+                            durasi = days,
+                            tgl_pengembalian = returnDate,
+                            image_path = imagepath,
+                            status = 0)
+                        rentalHistoryList.add(newRental)
+
+                        rentalHistoryAdapter.notifyItemInserted(rentalHistoryList.size - 1)
                     } else {
                         // Tampilkan pesan error dari server
                         Toast.makeText(this@CheckoutActivity, rentResponse.message, Toast.LENGTH_SHORT).show()

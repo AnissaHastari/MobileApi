@@ -88,9 +88,9 @@ class LoginActivity : AppCompatActivity() {
                             val penggunaId = loginResponse.pengguna_id
                             val wallet = loginResponse.wallet
 
-                            // Simpan data pengguna ke SharedPreferences
                             val sharedPreferences = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
                             sharedPreferences.edit()
+                                .putBoolean("IsLoggedIn", true)
                                 .putString("penggunaId", penggunaId)
                                 .putString("wallet", wallet)
                                 .apply()
@@ -98,7 +98,6 @@ class LoginActivity : AppCompatActivity() {
                             Log.d(TAG, "Pengguna ID disimpan: $penggunaId")  // Tambahkan log ini untuk memverifikasi
                             Toast.makeText(this@LoginActivity, "Login Berhasil", Toast.LENGTH_SHORT).show()
 
-                            // Navigasi ke HomeActivity
                             val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                             startActivity(intent)
                             finish()

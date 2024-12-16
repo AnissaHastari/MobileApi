@@ -81,7 +81,7 @@ class ProfileActivity : AppCompatActivity() {
             updatestatus(penggunaId)
 
             val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse("http://192.168.18.2/Sewan/index.html")
+            intent.data = Uri.parse("http://192.168.147.128/Sewan/index.html")
             startActivity(intent)
         }
 
@@ -108,7 +108,7 @@ class ProfileActivity : AppCompatActivity() {
                                     if (User != null) {
                                         // Prepare profile image URL
                                         val profilePath = if (User.Profile_path.isNotEmpty()) {
-                                            "http://192.168.18.2:8000/storage/${User.Profile_path.replace("public/", "")}"
+                                            "http://192.168.147.128:8000/storage/${User.Profile_path.replace("public/", "")}"
                                         } else {
                                             null
                                         }
@@ -196,7 +196,7 @@ class ProfileActivity : AppCompatActivity() {
         sharedPreferences.edit().clear().apply()
 
         // Navigasi ke halaman login
-        val intent = Intent(this@ProfileActivity, LoginActivity::class.java)
+        val intent = Intent(this@ProfileActivity, MainActivity::class.java)
         startActivity(intent)
         finish()
     }

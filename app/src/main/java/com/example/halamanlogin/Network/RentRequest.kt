@@ -1,6 +1,6 @@
 package com.example.halamanlogin.Network
 
-data class RentRequest(
+data class  RentRequest(
     val owner_id: Int,
     val renter_id: Int,
     val item_id: Int,

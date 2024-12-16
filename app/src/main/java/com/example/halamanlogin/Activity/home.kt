@@ -28,6 +28,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home_pages)
 
+
         // Set up RecyclerView
         recyclerView = findViewById(R.id.productsRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -101,4 +102,9 @@ class HomeActivity : AppCompatActivity() {
         intent.putExtra("ownerid", product.pengguna_id)
         startActivity(intent)
     }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finishAffinity()
+    }
+
 }

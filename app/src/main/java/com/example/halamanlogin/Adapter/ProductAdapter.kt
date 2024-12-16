@@ -44,7 +44,7 @@ class ProductAdapter(private val onItemClick: (Product) -> Unit) :
             binding.productPriceTextView.text = rp
 
             // Load the image using Picasso or Glide
-            Picasso.get().load("http://192.168.18.2:8000${product.image_path}")
+            Picasso.get().load("http://192.168.147.128:8000${product.image_path}")
                 .placeholder(R.drawable.placeholder) // Placeholder saat gambar sedang dimuat
                 .resize(300, 300) // Ubah ukuran gambar untuk menghemat memori
                 .centerCrop() // Crop gambar agar sesuai dengan dimensi tampilan

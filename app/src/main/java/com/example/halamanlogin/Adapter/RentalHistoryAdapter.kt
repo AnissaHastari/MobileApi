@@ -51,7 +51,7 @@ class RentalHistoryAdapter(
         holder.hargaTotal.text = harga
 
         // Load image menggunakan Picasso
-        Picasso.get().load("http://192.168.18.2:8000${rental.image_path}")
+        Picasso.get().load("http://192.168.147.128:8000${rental.image_path}")
             .placeholder(R.drawable.placeholder) // Placeholder saat gambar sedang dimuat
             .resize(300, 300) // Ubah ukuran gambar untuk menghemat memori
             .centerCrop() // Crop gambar agar sesuai dengan dimensi tampilan

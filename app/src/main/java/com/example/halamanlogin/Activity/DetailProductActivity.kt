@@ -50,7 +50,7 @@ class ProductDetailActivity : AppCompatActivity() {
         tvDescription.text = productDescription
 
         // Load the image using Picasso
-        Picasso.get().load("http://192.168.18.2:8000$productImage")
+        Picasso.get().load("http://192.168.147.128:8000$productImage")
             .placeholder(R.drawable.placeholder) // Placeholder saat gambar sedang dimuat
             .resize(300, 300) // Ubah ukuran gambar untuk menghemat memori
             .centerCrop() // Crop gambar agar sesuai dengan dimensi tampilan
